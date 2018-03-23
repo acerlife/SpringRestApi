@@ -49,17 +49,12 @@ public class StudentServiceImplTest {
     }
 
     private Group createGroup(){
-        Group group = new Group();
-        group.setId(3L);
-        group.setGroupName("1Se");
+        Group group = new Group("1Se");
         return group;
     }
 
     private Student createStudent(){
-        Student student = new Student();
-        student.setId(1L);
-        student.setFirstName("Sam");
-        student.setGroup(createGroup());
+        Student student = new Student("Alex", createGroup());
         return student;
     }
 }

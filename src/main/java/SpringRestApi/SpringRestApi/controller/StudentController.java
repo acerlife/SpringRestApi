@@ -6,6 +6,8 @@ import SpringRestApi.SpringRestApi.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * Gets requests from server and returns students
@@ -13,31 +15,24 @@ import org.springframework.web.bind.annotation.*;
  * @author Yaroslav Makhnov
  */
 @RestController
+@RequestMapping("/students")
 public class StudentController {
     @Autowired
     private StudentServiceImpl studentService;
 
-    @RequestMapping(value = "/add-student/{studentName}/{groupId}", method = RequestMethod.GET)
-    public String addStudent(@PathVariable String studentName, @PathVariable Long groupId) {
-        Student student = new Student();
-        Group group = new Group();
-        System.out.print(studentName);
-        group.setId(groupId);
-        student.setFirstName(studentName);
-        student.setGroup(group);
+    @PostMapping
+    public @ResponseBody Student createStudent(@RequestBody Student student) {
         studentService.saveStudent(student);
-        return student.toString();
+        return student;
     }
 
-    @RequestMapping(value = "/show-students", produces = "application/json")
-    public String getStudents(){
-       return studentService.getStudents().toString();
+    @GetMapping("/")
+    public List<Student> getStudents(){
+       return studentService.getStudents();
     }
 
-    @RequestMapping("/show-students-by-id/{groupId}")
-    public String getStudentsByGroup(@PathVariable Long groupId){
-        Group group = new Group();
-        group.setId(groupId);
-        return studentService.getStudentsByGroup(group).toString();
+    @GetMapping("/groups/{group}")
+    public List<Student> getStudentsByGroup(@PathVariable Group group){
+        return studentService.getStudentsByGroup(group);
     }
 }

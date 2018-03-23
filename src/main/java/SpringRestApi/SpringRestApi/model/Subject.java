@@ -21,36 +21,28 @@ public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String subjectName;
+    private final String subjectName;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "subject")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "subject")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<SubjectGroupTeacher> subjectsGroupList;
 
-    public Long getId() {
-        return id;
+    public Subject(String subjectName){
+        this.subjectName = subjectName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getSubjectName() {
         return subjectName;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
     public List<SubjectGroupTeacher> getSubjectsGroupList() {
         return subjectsGroupList;
-    }
-
-    public void setSubjectsGroupList(List<SubjectGroupTeacher> subjectsGroupList) {
-        this.subjectsGroupList = subjectsGroupList;
     }
 
     @Override

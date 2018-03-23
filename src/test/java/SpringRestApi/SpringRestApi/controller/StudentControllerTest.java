@@ -63,8 +63,7 @@ public class StudentControllerTest {
     }
 
     private Group createGroup(){
-        Group group = new Group();
-        group.setGroupName("1Se");
+        Group group = new Group("1SE");
         return group;
     }
 }

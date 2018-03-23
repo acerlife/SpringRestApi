@@ -22,3 +22,4 @@ public class SubjectServiceImpl implements SubjectService {
         subjectDao.saveAndFlush(subject);
     }
 }
+

@@ -23,9 +23,7 @@ public class GroupServiceImplTest {
     }
 
     private Group createGroup(){
-        Group group = new Group();
-        group.setId(3L);
-        group.setGroupName("1Se");
+        Group group = new Group( "1SE");
         return group;
     }
 

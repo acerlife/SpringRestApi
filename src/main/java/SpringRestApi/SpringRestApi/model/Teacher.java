@@ -17,36 +17,28 @@ import java.util.List;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String firstName;
+    private final String firstName;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "teacher")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<SubjectGroupTeacher> subjectsGroupList;
 
-    public Long getId() {
-        return id;
+    public Teacher(String firstName){
+        this.firstName = firstName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public List<SubjectGroupTeacher> getSubjectsGroupList() {
         return subjectsGroupList;
-    }
-
-    public void setSubjectsGroupList(List<SubjectGroupTeacher> subjectsGroupList) {
-        this.subjectsGroupList = subjectsGroupList;
     }
 
     @Override

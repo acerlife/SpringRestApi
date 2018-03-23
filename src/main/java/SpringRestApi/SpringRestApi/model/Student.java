@@ -21,9 +21,9 @@ public class Student implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String firstName;
+    private final String firstName;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "student")
     @Fetch(value = FetchMode.SUBSELECT)
@@ -31,38 +31,27 @@ public class Student implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group group;
+    private final Group group;
+
+    public Student(String firstName, Group group){
+        this.firstName = firstName;
+        this.group = group;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public List<ExamBook> getExamBooks() {
         return examBooks;
     }
 
-    public void setExamBooks(List<ExamBook> examBooks) {
-        this.examBooks = examBooks;
-    }
-
     public Group getGroup() {
         return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 
     @Override

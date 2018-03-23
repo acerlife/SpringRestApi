@@ -15,48 +15,38 @@ public class ExamBook implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student;
+    private final Student student;
 
     @ManyToOne
     @JoinColumn(name = "subjects_group_id")
-    private SubjectGroupTeacher subjectsGroup;
+    private final SubjectGroupTeacher subjectsGroupTeacher;
 
-    private int mark;
+    private final int mark;
+
+    public ExamBook(Student student, SubjectGroupTeacher subjectGroupTeacher, int mark){
+        this.student = student;
+        this.subjectsGroupTeacher = subjectGroupTeacher;
+        this.mark = mark;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Student getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     public SubjectGroupTeacher getSubjectsGroup() {
-        return subjectsGroup;
-    }
-
-    public void setSubjectsGroup(SubjectGroupTeacher subjectsGroup) {
-        this.subjectsGroup = subjectsGroup;
+        return subjectsGroupTeacher;
     }
 
     public int getMark() {
         return mark;
-    }
-
-    public void setMark(int mark) {
-        this.mark = mark;
     }
 
     @Override
@@ -64,7 +54,7 @@ public class ExamBook implements Serializable{
         return "ExamBook{" +
                 "id=" + id +
                 ", student=" + student +
-                ", subjectsGroup=" + subjectsGroup +
+                ", subjectsGroup=" + subjectsGroupTeacher +
                 ", mark=" + mark +
                 '}';
     }
