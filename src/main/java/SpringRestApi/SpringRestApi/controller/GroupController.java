@@ -5,23 +5,24 @@ import SpringRestApi.SpringRestApi.service.impl.GroupServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
+@RequestMapping("/groups")
 public class GroupController {
     @Autowired
     private GroupServiceImpl groupService;
 
-    @RequestMapping(value = "/add-group/{groupName}", method = RequestMethod.GET)
-    public Group addGroup(@PathVariable String groupName){
-        Group group = new Group();
-        group.setGroupName(groupName);
+    @PostMapping("/")
+    public @ResponseBody Group saveGroup(@PathVariable Group group){
         groupService.saveGroup(group);
         return group;
     }
 
-    @RequestMapping(value = "/show-groups")
-    public String getGroups(){
-        return groupService.findAll().toString();
+    @GetMapping("/")
+    public List<Group> getGroups(){
+        return groupService.findAll();
     }
-
 }
+
