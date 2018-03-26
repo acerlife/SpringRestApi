@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
  * Created by Ярослав on 12.10.2017.
  */
 @RestController
+@RequestMapping("/subjcets")
 public class SubjectController {
     @Autowired
     private SubjectServiceImpl subjectService;
 
-    @RequestMapping(value = "/add-subject/{subjectName}", method = RequestMethod.GET)
-    public Subject addSubject(@PathVariable String subjectName) {
-        Subject subject = new Subject();
-        subject.setSubjectName(subjectName);
+    @PostMapping("/")
+    public @ResponseBody Subject saveSubject(@PathVariable Subject subject){
         subjectService.saveSubject(subject);
         return subject;
     }
